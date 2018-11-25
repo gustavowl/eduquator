@@ -1,7 +1,11 @@
 from tkinter import *
 from tkinter import ttk
-import sidebar
+from layout.sidebar import *
 
-root = Tk()
-sb = sidebar.Sidebar(parent=root)
-sb.mainloop()
+class LayoutManager:
+    def mainloop(self):
+        self.sb.mainloop()
+
+    def __init__(self):
+        self.root = Tk()
+        self.sb = Sidebar(parent=self.root)
