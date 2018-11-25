@@ -70,9 +70,3 @@ class Sidebar(Frame):
         Frame.__init__(self, parent)
         self.pack()
         self.createWidgets()
-
-root = Tk()
-sb = Sidebar(parent=root)
-#print sb.var #works
-sb.mainloop()
-
