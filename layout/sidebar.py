@@ -20,9 +20,24 @@ class Sidebar(Frame):
         self.qubit1.grid(column=1, row=4)
         #self.scroll.grid(column=2, row=0, rowspan=5)
 
-        self.circFr.grid(row=3, columnspan=3)
+        self.circFr.grid(row=3, columnspan=2)
 
-    #def createWidgets(self):
+        for child in self.circFr.winfo_children():
+            child.grid_configure(padx=3, pady=3)
+
+    def createActionWidgets(self):
+        self.actionFr = ttk.Frame(self, borderwidth=5, relief="sunken",
+                width=320, height=640)
+        self.simButton = ttk.Button(self.actionFr, text="Start simulation")
+        self.tutButton = ttk.Button(self.actionFr, text="Tutorial")
+
+        self.simButton.grid(columnspan=2, row=0)
+        self.tutButton.grid(columnspan=2, row=1)
+
+        self.actionFr.grid(row=4, columnspan=2)
+        
+        for child in self.actionFr.winfo_children():
+            child.grid_configure(padx=3, pady=3)
 
     def createWidgets(self):
         self.fr = ttk.Frame(self, borderwidth=5, relief="sunken",
@@ -33,7 +48,6 @@ class Sidebar(Frame):
         self.button3 = ttk.Button(self.fr, text="3")
         self.button4 = ttk.Button(self.fr, text="4")
         #self.tools_separator = ttk.Separator(self.fr, orient=HORIZONTAL)
-        self.createCircuitWidgets()
 
         self.fr.grid(column=0, row=0)
         self.tools_label.grid(column=0, row=0, columnspan=2)
@@ -45,8 +59,9 @@ class Sidebar(Frame):
 
         for child in self.fr.winfo_children():
             child.grid_configure(padx=3, pady=3)
-        for child in self.circFr.winfo_children():
-            child.grid_configure(padx=3, pady=3)
+
+        self.createCircuitWidgets()
+        self.createActionWidgets()
 
 
     #TODO: Add widgets commands
