@@ -11,21 +11,34 @@ class Simulator(Frame):
             self.canvas.create_line([(i, 0), (i, height)], tag='grid_line')
 
     def createGrid(self):
-        self.width = 720
-        self.height = 720 #480
+        self.width = self.winfo_width()
+        self.height = self.winfo_height()
 
-        #self.canvas = tk.Canvas(self, width=self.width,
-        #        height=self.height, bg="white")
         self.canvas = tk.Canvas(self, bg="white")
-        #self.canvas.pack(fill=tk.BOTH, expand=True)
         self.canvas.grid(sticky="nsew")
 
-        self.createVerticalLines(self.width, self.height, 75)
-        self.createHorizontalLines(self.width, self.height, 75)
+        self.createVerticalLines(self.width, self.height, 50)
+        self.createHorizontalLines(self.width, self.height, 50)
 
+    def resize(self, event):
+        self.width = self.winfo_width()
+        self.height = self.winfo_height()
+
+        self.canvas.delete("grid_line") #delete("all")
+        self.createVerticalLines(self.width, self.height, 50)
+        self.createHorizontalLines(self.width, self.height, 50)
+        
 
     def __init__(self, parent=None):
         Frame.__init__(self, parent)
-        self.pack()
-        self.columnconfigure(0, weight=1)
+        self.grid(row=0, column=0, sticky="nsew")
+
         self.createGrid()
+
+        parent.columnconfigure(0, weight=1)
+        parent.rowconfigure(0, weight=1)
+        
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(0, weight=1)
+
+        self.bind("<Configure>", self.resize)

@@ -25,9 +25,7 @@ class LayoutManager:
         self.sideFrame = tk.Frame(self.screen, borderwidth=5, relief="sunken", bg="red")
         self.sideFrame.grid(row=0, column=0, sticky="nsew")
         self.sb = Sidebar(parent=self.sideFrame)
-        #self.sideFrame.columnconfigure(0, weight=1)
 
-        self.simulatorFrame = ttk.Frame(self.screen, borderwidth=5, relief="sunken") #,
-                #width=500, height=640)
+        self.simulatorFrame = tk.Frame(self.screen, borderwidth=5, relief="sunken", bg="orange")
         self.simulatorFrame.grid(row=0, column=1, sticky="nsew")
         self.simulatorGrid = Simulator(parent=self.simulatorFrame)
