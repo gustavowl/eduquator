@@ -14,13 +14,16 @@ class Sidebar(Frame):
         self.qubit1 = ttk.Button(self.circFr, text="|1⟩")
 
         self.circuit_label.grid(row=0, columnspan=2)
-        self.comp1.grid(columnspan=2, row=1)
-        self.comp2.grid(columnspan=2, row=2, rowspan=2)
-        self.qubit0.grid(column=0, row=4)
-        self.qubit1.grid(column=1, row=4)
+        self.comp1.grid(columnspan=2, row=1, sticky="nsew")
+        self.comp2.grid(columnspan=2, row=2, rowspan=2, sticky="nsew")
+        self.qubit0.grid(column=0, row=4, sticky="nsew")
+        self.qubit1.grid(column=1, row=4, sticky="nsew")
         #self.scroll.grid(column=2, row=0, rowspan=5)
+        self.circFr.grid(row=3, columnspan=2, stick="nsew")
 
-        self.circFr.grid(row=3, columnspan=2)
+        for i in range(5):
+            self.circFr.rowconfigure(i, weight="1")
+            self.circFr.columnconfigure(i, weight="1")
 
         for child in self.circFr.winfo_children():
             child.grid_configure(padx=3, pady=3)
@@ -31,17 +34,20 @@ class Sidebar(Frame):
         self.simButton = ttk.Button(self.actionFr, text="Start simulation")
         self.tutButton = ttk.Button(self.actionFr, text="Tutorial")
 
-        self.simButton.grid(columnspan=2, row=0)
-        self.tutButton.grid(columnspan=2, row=1)
+        self.simButton.grid(columnspan=2, row=0, sticky="nsew")
+        self.tutButton.grid(columnspan=2, row=1, sticky="nsew")
+        self.actionFr.grid(row=4, columnspan=2, sticky="nsew")
 
-        self.actionFr.grid(row=4, columnspan=2)
+        for i in range(2):
+            self.actionFr.columnconfigure(i, weight=1)
+            self.actionFr.rowconfigure(i, weight=1)
         
         for child in self.actionFr.winfo_children():
             child.grid_configure(padx=3, pady=3)
 
     def createWidgets(self):
         self.fr = ttk.Frame(self, borderwidth=5, relief="sunken",
-                width=320, height=640)
+                width=320, height=140)
         self.tools_label = ttk.Label(self.fr, text="Tools")
         self.button1 = ttk.Button(self.fr, text="1")
         self.button2 = ttk.Button(self.fr, text="2")
@@ -49,12 +55,12 @@ class Sidebar(Frame):
         self.button4 = ttk.Button(self.fr, text="4")
         #self.tools_separator = ttk.Separator(self.fr, orient=HORIZONTAL)
 
-        self.fr.grid(column=0, row=0)
+        self.fr.grid(column=0, row=0, sticky="nsew")
         self.tools_label.grid(column=0, row=0, columnspan=2)
-        self.button1.grid(column=0, row=1)
-        self.button2.grid(column=1, row=1)
-        self.button3.grid(column=0, row=2)
-        self.button4.grid(column=1, row=2)
+        self.button1.grid(column=0, row=1, sticky="nsew")
+        self.button2.grid(column=1, row=1, sticky="nsew")
+        self.button3.grid(column=0, row=2, sticky="nsew")
+        self.button4.grid(column=1, row=2, sticky="nsew")
         #self.tools_separator.grid(row=3, columnspan=2, sticky=(W, E))
 
         for child in self.fr.winfo_children():
@@ -70,3 +76,7 @@ class Sidebar(Frame):
         Frame.__init__(self, parent)
         self.pack()
         self.createWidgets()
+
+        for row in range(5):
+            self.rowconfigure(row, weight=1)
+            parent.rowconfigure(row, weight=1)
