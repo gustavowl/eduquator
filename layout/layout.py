@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from layout.screenstart import *
-from layout.screensimulation import *
+from layout.screensimulator import *
 
 class LayoutManager:
     def mainloop(self):
@@ -17,7 +17,7 @@ class LayoutManager:
 
         self.frames = {}
 
-        for F in (ScreenStart, ScreenSimulation):
+        for F in (ScreenStart, ScreenSimulator):
             frame = F(parent=self.root, controller=self)
             self.frames[F.__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")

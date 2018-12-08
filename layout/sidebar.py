@@ -38,9 +38,9 @@ class Sidebar(Frame):
                 width=320, height=640)
         self.actionFr.grid(row=2, column=0, sticky="nsew")
 
-        self.simButton = ttk.Button(self.actionFr, text="Start simulation")
-        #self.simButton = ttk.Button(self.actionFr, text="Start simulation",
-        #        command=lambda: self.controller.show_frame("Simulator"))
+        #self.simButton = ttk.Button(self.actionFr, text="Start simulation")
+        self.simButton = ttk.Button(self.actionFr, text="Start simulation",
+                command=lambda: self.controller.show_frame("ScreenSimulator"))
         self.simButton.grid(columnspan=2, row=0, sticky="nsew")
 
         self.tutButton = ttk.Button(self.actionFr, text="Tutorial")
