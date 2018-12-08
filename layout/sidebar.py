@@ -38,7 +38,8 @@ class Sidebar(Frame):
                 width=320, height=640)
         self.actionFr.grid(row=2, column=0, sticky="nsew")
 
-        self.simButton = ttk.Button(self.actionFr, text="Start simulation")
+        self.simButton = ttk.Button(self.actionFr, text="Start simulation",
+                command=lambda: self.controller.show_frame("Simulator"))
         self.simButton.grid(columnspan=2, row=0, sticky="nsew")
 
         self.tutButton = ttk.Button(self.actionFr, text="Tutorial")
@@ -84,8 +85,9 @@ class Sidebar(Frame):
 
     #TODO: Add widgets commands
 
-    def __init__(self, parent=None):
+    def __init__(self, parent, controller):
         Frame.__init__(self, parent)
+        self.controller = controller
         self.grid(row=0, column=0, sticky="nsew")
         self.createWidgets()
 

@@ -28,9 +28,12 @@ class Simulator(Frame):
         self.createVerticalLines(self.width, self.height, 50)
         self.createHorizontalLines(self.width, self.height, 50)
         
+    def theFinalCountdown(self):
+        self.controller.show_frame("Sidebar")
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, controller=None):
         Frame.__init__(self, parent)
+        self.controller = controller
         self.grid(row=0, column=0, sticky="nsew")
 
         self.createGrid()
@@ -42,3 +45,5 @@ class Simulator(Frame):
         self.rowconfigure(0, weight=1)
 
         self.bind("<Configure>", self.resize)
+
+        self.theFinalCountdown()
