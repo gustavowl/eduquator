@@ -3,7 +3,7 @@ from tkinter import ttk
 
 class SimulatorControl(Frame):
 
-    def createWidgets(self):
+    def createWidgets(self, onStopPressed):
         self.statusLabel = ttk.Label(self, text="Simulating")
         self.statusLabel.grid(column=1, row=0, columnspan=4)
 
@@ -17,13 +17,13 @@ class SimulatorControl(Frame):
         self.forwardButton.grid(column=3, row=1, sticky="nsew")
 
         self.stopButton = ttk.Button(self, text="[]",
-                command=lambda: self.controller.show_frame("ScreenStart"))
+                command=lambda: self.controller.show_frame(onStopPressed))
         self.stopButton.grid(column=4, row=1, sticky="nsew")
 
         for child in self.winfo_children():
             child.grid_configure(padx=3, pady=3)
 
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, onStopPressed):
         Frame.__init__(self, parent)
         self.controller = controller
         self.grid(row=0, column=0, sticky="nsew")
@@ -39,4 +39,4 @@ class SimulatorControl(Frame):
         for row in range(4):
             self.rowconfigure(row+1, weight=1)
 
-        self.createWidgets()
+        self.createWidgets(onStopPressed)

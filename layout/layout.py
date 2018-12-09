@@ -19,7 +19,11 @@ class LayoutManager:
         self.frames = {}
 
         for F in (ScreenStart, ScreenSimulator, ScreenTutorial):
-            frame = F(parent=self.root, controller=self)
+            if (F != ScreenSimulator):
+                frame = F(parent=self.root, controller=self)
+            else:
+                frame = F(parent=self.root, controller=self, 
+                        onStopPressed = "ScreenStart")
             self.frames[F.__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")
         self.show_frame("ScreenStart")

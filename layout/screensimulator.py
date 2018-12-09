@@ -6,7 +6,7 @@ from layout.representations import *
 
 class ScreenSimulator(Frame):
     
-    def __init__(self, parent=None, controller=None):
+    def __init__(self, parent=None, controller=None, onStopPressed=None):
         Frame.__init__(self, parent)
         self.controller = controller
         self.grid(row=0, column=0, sticky="nsew")
@@ -22,7 +22,7 @@ class ScreenSimulator(Frame):
         self.simulatorControllerFrame = tk.Frame(self, borderwidth=5, bg="blue")
         self.simulatorControllerFrame.grid(row=0, column=0, sticky="ew")
         self.sc = SimulatorControl(parent=self.simulatorControllerFrame,
-                controller=self.controller)
+                controller=self.controller, onStopPressed=onStopPressed)
         
         self.simulatorFrame = tk.Frame(self, borderwidth=5, bg="green")
         self.simulatorFrame.grid(row=1, column=0, sticky="nsew")
