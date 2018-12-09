@@ -43,7 +43,8 @@ class Sidebar(Frame):
                 command=lambda: self.controller.show_frame("ScreenSimulator"))
         self.simButton.grid(columnspan=2, row=0, sticky="nsew")
 
-        self.tutButton = ttk.Button(self.actionFr, text="Tutorial")
+        self.tutButton = ttk.Button(self.actionFr, text="Tutorial",
+                command=lambda: self.controller.show_frame("ScreenTutorial"))
         self.tutButton.grid(columnspan=2, row=1, sticky="nsew")
 
         for i in range(2):
