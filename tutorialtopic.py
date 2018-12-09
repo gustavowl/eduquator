@@ -12,12 +12,16 @@ class TutorialTopic(tk.Frame):
         #assert previous \in TutorialTopic
         self.previous = previous
 
-    def getPrevius(self):
+    def getPrevious(self):
         return self.previous
 
     def setNext(self, next):
         #assert next \in TutorialTopic
         self.next = next
+    
+    def setOutline(self, outline):
+        #assert outline \in Frame
+        self.outline = outline
 
     def getNext(self):
         return self.next
@@ -36,4 +40,5 @@ class TutorialTopic(tk.Frame):
         self.previous = None
         self.actual = actual
         self.next = None
+        self.outline = None
         self.topictype = topictype

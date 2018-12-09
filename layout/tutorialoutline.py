@@ -3,14 +3,13 @@ from tutorialtopic import *
 
 class TutorialOutline(tk.Frame):
 
+    def setCallerScreen(self, caller):
+        #assert caller \in frame
+        self.callerScreen = caller
+
     def summon(self, event):
-        print(event.widget)
         index = self.labels.index(event.widget)
-        print(index)
         self.controller.show_frame(self.tutorialTopics[index])
-        
-    def bindToFrames(self, tutorialFrames):
-        print("TODO")
 
     def __init__(self, parent=None, controller=None, tutorialTopics=None):
         tk.Frame.__init__(self, parent)
@@ -34,9 +33,10 @@ class TutorialOutline(tk.Frame):
             self.labels[i].grid(column=0, row=i+1, sticky="nsew")
             self.labels[i].bind("<Button-1>", self.summon)
 
+        self.callerScreen = None
         #creates "quit button"
         self.quit = tk.Button(self, text="Quit", command=lambda:
-                self.controller.show_frame("ScreenStart"))
+                self.controller.show_frame(self.callerScreen))
         self.quit.grid(row=len(tutorialTopics)+1, columnspan=2, sticky="nsew")
 
         self.columnconfigure(0, weight=1)

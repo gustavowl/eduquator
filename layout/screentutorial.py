@@ -1,22 +1,27 @@
 import tkinter as tk
 from tutorialtopic import *
 from layout.tutorialoutline import *
+from layout.tutorialtext import *
 
 class ScreenTutorial(tk.Frame):
 
     def show_frame(self, frame):
-        print("I WAS CALLED")
-        print(frame)
-        print("==================")
-        frame.tkraise()
+        if frame == self.parent:
+            self.controller.show_frame("ScreenStart")
+            return
 
+        frame.tkraise()
 
     def createTopics(self, topicNames, topicTypes):
         #assert len(topicNames) == len(topicTypes)
         for i in range(len(topicNames)):
 
-                self.tutorialTopics.append(TutorialTopic(self, self, topicNames[i],
-                    topicTypes[i]))
+                if (topicTypes[i] == TopicType.TEXT):
+                    self.tutorialTopics.append(TutorialText(self, self, topicNames[i]))
+                else:
+                    self.tutorialTopics.append(TutorialTopic(self, self, topicNames[i],
+                        topicTypes[i]))
+
                 self.tutorialTopics[i].grid(row=0, column=0, sticky="nsew")
 
                 if (i > 0):
@@ -29,6 +34,7 @@ class ScreenTutorial(tk.Frame):
     def __init__(self, parent=None, controller=None):
 
         tk.Frame.__init__(self, parent)
+        self.parent = parent
         self.controller = controller
         self.grid(row = 0, column=0, sticky="nsew")
 
@@ -48,3 +54,6 @@ class ScreenTutorial(tk.Frame):
         self.createTopics(topicNames, topicTypes)
 
         self.outline = TutorialOutline(self, self, self.tutorialTopics)
+        self.outline.setCallerScreen(self.parent)
+        for i in range(len(topicNames)):
+            self.tutorialTopics[i].setOutline(self.outline)
