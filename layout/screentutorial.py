@@ -2,6 +2,7 @@ import tkinter as tk
 from tutorialtopic import *
 from layout.tutorialoutline import *
 from layout.tutorialtext import *
+from layout.tutorialtextandsimulator import *
 
 class ScreenTutorial(tk.Frame):
 
@@ -18,6 +19,9 @@ class ScreenTutorial(tk.Frame):
 
                 if (topicTypes[i] == TopicType.TEXT):
                     self.tutorialTopics.append(TutorialText(self, self, topicNames[i]))
+                elif (topicTypes[i] == TopicType.TEXT_AND_SIMULATOR):
+                    self.tutorialTopics.append(TutorialTextAndSimulator(self, self,
+                        topicNames[i]))
                 else:
                     self.tutorialTopics.append(TutorialTopic(self, self, topicNames[i],
                         topicTypes[i]))

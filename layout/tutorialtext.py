@@ -7,13 +7,9 @@ class TutorialText(TutorialTopic):
         super().setPrevious(previous)
         self.buttonPrevious.grid(row=2, column=0, sticky="nsew")
 
-    def setNext(self, previous):
-        super().setNext(previous)
+    def setNext(self, next):
+        super().setNext(next)
         self.buttonNext.grid(row=2, column=2, sticky="nsew")
-
-    def summon(self, event):
-        index = self.labels.index(event.widget)
-        self.controller.show_frame(self.tutorialTopics[index])
 
     #tutorial/actual.should be name.
     #tutorial/actual.tut correspond to file containg tutorial text
@@ -21,14 +17,13 @@ class TutorialText(TutorialTopic):
     #tutorial/actual.qc contains quantum circuit for simulation
     def __init__(self, parent=None, controller=None, actual=None):
         tk.Frame.__init__(self, parent)
+        self.parent = parent
         self.controller = controller
         self.grid(row = 0, column = 0, sticky="nsew")
         self.actual = actual;
 
         parent.columnconfigure(0, weight=1)
         parent.rowconfigure(0, weight=1)
-
-        self.labels = []
 
         #creates Tutorial main label
         self.mainLabel = tk.Label(self, text=self.actual)
