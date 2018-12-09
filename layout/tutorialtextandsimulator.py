@@ -1,6 +1,7 @@
 import tkinter as tk
 from tutorialtopic import *
 from layout.tutorialtext import *
+from layout.tutorialsimulator import *
 
 class TutorialTextAndSimulator(TutorialTopic):
 
@@ -28,6 +29,11 @@ class TutorialTextAndSimulator(TutorialTopic):
         self.textFrame = tk.Frame(self, borderwidth=5, bg="orange")
         self.textFrame.grid(row=0, column = 0, sticky="nsew")
         self.tutText = TutorialText(parent=self.textFrame,
+                controller=self.controller, actual=self.actual)
+
+        self.simFrame = tk.Frame(self, borderwidth=5)
+        self.simFrame.grid(row=0, column = 1, sticky="nsew")
+        self.tutSim = TutorialSimulator(parent=self.simFrame,
                 controller=self.controller, actual=self.actual)
 
         parent.columnconfigure(0, weight=1)
