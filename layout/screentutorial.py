@@ -5,13 +5,11 @@ from layout.tutorialoutline import *
 class ScreenTutorial(tk.Frame):
 
     def show_frame(self, frame):
+        print("I WAS CALLED")
+        print(frame)
+        print("==================")
         frame.tkraise()
 
-    def summon(self, event):
-        index = self.labels.index(event.widget)
-        #frame = self.tutorialTopics[index]
-        #frame.tkraise()
-        #print("shouldve rosen")
 
     def createTopics(self, topicNames, topicTypes):
         #assert len(topicNames) == len(topicTypes)

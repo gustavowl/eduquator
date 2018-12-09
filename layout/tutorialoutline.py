@@ -7,6 +7,7 @@ class TutorialOutline(tk.Frame):
         print(event.widget)
         index = self.labels.index(event.widget)
         print(index)
+        self.controller.show_frame(self.tutorialTopics[index])
         
     def bindToFrames(self, tutorialFrames):
         print("TODO")
@@ -15,6 +16,7 @@ class TutorialOutline(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.grid(row = 0, column = 0, sticky="nsew")
+        self.tutorialTopics = tutorialTopics
 
         parent.columnconfigure(0, weight=1)
         parent.rowconfigure(0, weight=1)
