@@ -11,6 +11,8 @@ class TutorialTopic(tk.Frame):
     def setPrevious(self, previous):
         #assert previous \in TutorialTopic
         self.previous = previous
+        self.buttonPrevious = tk.Button(self, text="<--",
+                command=lambda: self.controller.show_frame(self.previous))
 
     def getPrevious(self):
         return self.previous
@@ -18,6 +20,9 @@ class TutorialTopic(tk.Frame):
     def setNext(self, next):
         #assert next \in TutorialTopic
         self.next = next
+        self.next = next
+        self.buttonNext = tk.Button(self, text="-->",
+                command=lambda: self.controller.show_frame(self.next))
     
     def setOutline(self, outline):
         #assert outline \in Frame
@@ -37,8 +42,13 @@ class TutorialTopic(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.parent = parent
         self.controller = controller
+
         self.previous = None
         self.actual = actual
         self.next = None
+
+        self.buttonPrevious = None
+        self.buttonNext = None
+
         self.outline = None
         self.topictype = topictype

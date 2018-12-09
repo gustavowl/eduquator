@@ -3,6 +3,14 @@ from tutorialtopic import *
 
 class TutorialText(TutorialTopic):
 
+    def setPrevious(self, previous):
+        super().setPrevious(previous)
+        self.buttonPrevious.grid(row=2, column=0, sticky="nsew")
+
+    def setNext(self, previous):
+        super().setNext(previous)
+        self.buttonNext.grid(row=2, column=2, sticky="nsew")
+
     def summon(self, event):
         index = self.labels.index(event.widget)
         self.controller.show_frame(self.tutorialTopics[index])
