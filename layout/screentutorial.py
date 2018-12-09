@@ -1,17 +1,25 @@
-from tkinter import *
-from tkinter import ttk
+import tkinter as tk
 from tutorialtopic import *
+from layout.tutorialoutline import *
 
-class ScreenTutorial(Frame):
+class ScreenTutorial(tk.Frame):
+
+    def show_frame(self, frame):
+        frame.tkraise()
+
+    def summon(self, event):
+        index = self.labels.index(event.widget)
+        #frame = self.tutorialTopics[index]
+        #frame.tkraise()
+        #print("shouldve rosen")
 
     def createTopics(self, topicNames, topicTypes):
         #assert len(topicNames) == len(topicTypes)
         for i in range(len(topicNames)):
 
-                self.labels.append(ttk.Label(self, text=topicNames[i]))
-                self.labels[i].grid(column=0, row=i+1, sticky="nsew")
-
-                self.tutorialTopics.append(TutorialTopic(topicNames[i], topicTypes[i]))
+                self.tutorialTopics.append(TutorialTopic(self, self, topicNames[i],
+                    topicTypes[i]))
+                self.tutorialTopics[i].grid(row=0, column=0, sticky="nsew")
 
                 if (i > 0):
                     #set this' previous info
@@ -22,7 +30,7 @@ class ScreenTutorial(Frame):
     
     def __init__(self, parent=None, controller=None):
 
-        Frame.__init__(self, parent)
+        tk.Frame.__init__(self, parent)
         self.controller = controller
         self.grid(row = 0, column=0, sticky="nsew")
 
@@ -37,22 +45,8 @@ class ScreenTutorial(Frame):
             TopicType.EXERCISE,
             TopicType.EXERCISE_AND_SIMULATOR]
 
-        self.labels = []
-        self.tutorialTopics = []
-
-        self.columnconfigure(0, weight=1)
-        self.columnconfigure(1, weight=1)
-        for i in range(len(topicNames) + 2):
-            self.rowconfigure(i, weight=1)
-
-        #creates Tutorial main label
-        self.mainLabel = ttk.Label(self, text="TUTORIAL")
-        self.mainLabel.grid(row=0, columnspan=2, sticky="nsew")
-
         #creates tutorial outline
+        self.tutorialTopics = []
         self.createTopics(topicNames, topicTypes)
 
-        #creates "quit button"
-        self.quit = ttk.Button(self, text="Quit")
-        #TODO: add command
-        self.quit.grid(row=len(topicNames)+1, columnspan=2, sticky="nsew")
+        self.outline = TutorialOutline(self, self, self.tutorialTopics)

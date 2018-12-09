@@ -1,4 +1,5 @@
 from enum import Enum
+import tkinter as tk
 
 class TopicType(Enum):
     TEXT = 1
@@ -6,7 +7,7 @@ class TopicType(Enum):
     EXERCISE = 3
     EXERCISE_AND_SIMULATOR = 4
 
-class TutorialTopic:
+class TutorialTopic(tk.Frame):
     def setPrevious(self, previous):
         #assert previous \in TutorialTopic
         self.previous = previous
@@ -28,7 +29,10 @@ class TutorialTopic:
     def getActual(self):
         return self.actual
         
-    def __init__(self, actual, topictype):
+    def __init__(self, parent, controller, actual, topictype):
+        tk.Frame.__init__(self, parent)
+        self.parent = parent
+        self.controller = controller
         self.previous = None
         self.actual = actual
         self.next = None
