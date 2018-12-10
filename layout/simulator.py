@@ -1,7 +1,22 @@
 import tkinter as tk
 from tkinter import *
+from filemanager import *
 
 class Simulator(Frame):
+    def loadCircuit(self, filename):
+        self.quantumCircuit = self.fileManager.readQuantumCircuit(filename)
+
+    def drawCircuit(self):
+        if (self.quantumCircuit != None):
+            qcmatrix = self.quantumCircuit.getCircuit()
+            for y in range (len(qcmatrix)):
+                for x in range (len(qcmatrix[y])):
+                    self.canvas.create_text(self.spacing / 2 + x * self.spacing,
+                            self.spacing / 2 + y * self.spacing, font="Times 18 bold",
+                            text=qcmatrix[y][x].getLabel())
+
+            self.quantumCircuit.print()
+
     def createHorizontalLines(self, width, height, spacing):
         for i in range(0, height, spacing):
             self.canvas.create_line([(0, i), (width, i)], tag='grid_line')
@@ -13,20 +28,21 @@ class Simulator(Frame):
     def createGrid(self):
         self.width = self.winfo_width()
         self.height = self.winfo_height()
+        self.spacing = 100
 
         self.canvas = tk.Canvas(self, bg="white")
         self.canvas.grid(sticky="nsew")
 
-        self.createVerticalLines(self.width, self.height, 50)
-        self.createHorizontalLines(self.width, self.height, 50)
+        self.createVerticalLines(self.width, self.height, self.spacing)
+        self.createHorizontalLines(self.width, self.height, self.spacing)
 
     def resize(self, event):
         self.width = self.winfo_width()
         self.height = self.winfo_height()
 
         self.canvas.delete("grid_line") #delete("all")
-        self.createVerticalLines(self.width, self.height, 50)
-        self.createHorizontalLines(self.width, self.height, 50)
+        self.createVerticalLines(self.width, self.height, self.spacing)
+        self.createHorizontalLines(self.width, self.height, self.spacing)
         
     def __init__(self, parent=None, controller=None):
         Frame.__init__(self, parent)
@@ -41,3 +57,8 @@ class Simulator(Frame):
         self.createGrid()
 
         self.bind("<Configure>", self.resize)
+
+        self.quantumCircuit = None
+        self.fileManager = FileManager()
+
+        self.drawCircuit()

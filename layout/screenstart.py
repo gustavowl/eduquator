@@ -38,5 +38,9 @@ class ScreenStart(Frame):
         self.simulatorFrame = tk.Frame(self, borderwidth=5, relief="sunken", bg="orange")
         self.simulatorFrame.grid(row=0, column=1, sticky="nsew")
         self.simulatorGrid = Simulator(parent=self.simulatorFrame, controller=self.controller)
+        
+        #TODO: dinamically
+        self.simulatorGrid.loadCircuit("circuits/circuit.qc")
+        self.simulatorGrid.drawCircuit()
 
         parent.config(menu=self.menubar)
