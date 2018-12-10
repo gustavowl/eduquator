@@ -33,4 +33,6 @@ class LayoutManager:
 
     def show_frame(self, page_name):
         frame = self.frames[page_name]
+        if (page_name == "ScreenSimulator"):
+            self.frames[page_name].setCircuit( self.frames["ScreenStart"].getCircuit() )
         frame.tkraise()

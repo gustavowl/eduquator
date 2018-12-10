@@ -6,6 +6,10 @@ from layout.representations import *
 
 class ScreenSimulator(Frame):
     
+    def setCircuit(self, circuit):
+        self.simulator.loadCircuit(circuit)
+        self.simulator.drawCircuit()
+
     def __init__(self, parent=None, controller=None, onStopPressed=None):
         Frame.__init__(self, parent)
         self.controller = controller
@@ -30,4 +34,6 @@ class ScreenSimulator(Frame):
 
         self.repFrame = tk.Frame(self, borderwidth=4, bg="blue")
         self.repFrame.grid(row=2, column=0, sticky="nsew")
-        self.representations= Representations(parent=self.repFrame, controller=self.controller)
+        self.representations = Representations(parent=self.repFrame, controller=self.controller)
+
+        self.simulator.drawCircuit()

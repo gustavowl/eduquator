@@ -5,6 +5,9 @@ from layout.simulator import *
 
 class ScreenStart(Frame):
 
+    def getCircuit(self):
+        return self.circuitInWorkspace
+
     def __init__(self, parent=None, controller=None):
         Frame.__init__(self, parent)
         self.controller = controller
@@ -40,7 +43,8 @@ class ScreenStart(Frame):
         self.simulatorGrid = Simulator(parent=self.simulatorFrame, controller=self.controller)
         
         #TODO: dinamically
-        self.simulatorGrid.loadCircuit("circuits/circuit.qc")
+        self.circuitInWorkspace = "circuits/circuit.qc"
+        self.simulatorGrid.loadCircuit(self.circuitInWorkspace)
         self.simulatorGrid.drawCircuit()
 
         parent.config(menu=self.menubar)

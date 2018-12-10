@@ -87,11 +87,15 @@ class Sidebar(Frame):
 
     #TODO: Add widgets commands
 
+    def setCircuit(self, circuit):
+        self.circuitInWorkspace = circuit
+
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
         self.controller = controller
         self.grid(row=0, column=0, sticky="nsew")
         self.createWidgets()
+        self.circuitInWorkspace = None
 
         parent.columnconfigure(0, weight=1)
         parent.rowconfigure(0, weight=1)
