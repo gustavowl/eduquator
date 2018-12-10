@@ -1,9 +1,18 @@
 from tkinter import *
+from tkinter import filedialog
 from tkinter import ttk
 from layout.sidebar import *
 from layout.simulator import *
 
 class ScreenStart(Frame):
+
+    def selectCircuitFile(self):
+        self.filename =  filedialog.askopenfilename(initialdir = "/home/",
+                title = "Select file",
+                filetypes = (("quantum circuit files","*.qc"),("all files","*.*")))
+        self.circuitInWorkspace = self.filename
+        self.simulatorGrid.loadCircuit(self.circuitInWorkspace)
+        self.simulatorGrid.drawCircuit()
 
     def getCircuit(self):
         return self.circuitInWorkspace
@@ -26,12 +35,11 @@ class ScreenStart(Frame):
         self.menubar = Menu(parent)
         filemenu = Menu(self.menubar, tearoff=0)
         filemenu.add_command(label="New")
-        filemenu.add_command(label="Open")
+        filemenu.add_command(label="Open", command=self.selectCircuitFile)
         filemenu.add_command(label="Save")
         filemenu.add_command(label="Save as...")
         filemenu.add_command(label="Close")
 
-        filemenu.add_separator()
         self.menubar.add_cascade(label="File", menu=filemenu)
        
         self.sideFrame = tk.Frame(self, borderwidth=5, relief="sunken", bg="red")
@@ -42,9 +50,7 @@ class ScreenStart(Frame):
         self.simulatorFrame.grid(row=0, column=1, sticky="nsew")
         self.simulatorGrid = Simulator(parent=self.simulatorFrame, controller=self.controller)
         
-        #TODO: dinamically
-        self.circuitInWorkspace = "circuits/circuit.qc"
-        self.simulatorGrid.loadCircuit(self.circuitInWorkspace)
+        self.circuitInWorkspace = None
         self.simulatorGrid.drawCircuit()
 
         parent.config(menu=self.menubar)

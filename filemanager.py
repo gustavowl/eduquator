@@ -41,6 +41,9 @@ class FileManager:
         return gate
 
     def readQuantumCircuit(self, filename):
+        if (filename == "" or filename == None):
+            return None
+
         self.file = open(filename, "r")
 
         #create new QC
