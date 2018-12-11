@@ -17,6 +17,8 @@ The project's report requested by the professor can be found at
 python3 main.py
 ```
 
+**The current implementation probably does not execute in Windows**
+
 ## Scenarios:
 
 From the six scenarios described in the report, the first five were developed.
