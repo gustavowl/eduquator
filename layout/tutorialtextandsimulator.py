@@ -2,6 +2,7 @@ import tkinter as tk
 from tutorialtopic import *
 from layout.tutorialtext import *
 from layout.tutorialsimulator import *
+from filemanager import *
 
 class TutorialTextAndSimulator(TutorialTopic):
 
@@ -24,7 +25,7 @@ class TutorialTextAndSimulator(TutorialTopic):
         self.parent = parent
         self.controller = controller
         self.grid(row = 0, column = 0, sticky="nsew")
-        self.actual = actual;
+        self.actual = actual.strip();
 
         self.textFrame = tk.Frame(self, borderwidth=5, bg="orange")
         self.textFrame.grid(row=0, column = 0, sticky="nsew")

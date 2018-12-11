@@ -1,5 +1,6 @@
 import tkinter as tk
 from tutorialtopic import *
+from filemanager import *
 
 class TutorialText(TutorialTopic):
 
@@ -20,7 +21,7 @@ class TutorialText(TutorialTopic):
         self.parent = parent
         self.controller = controller
         self.grid(row = 0, column = 0, sticky="nsew")
-        self.actual = actual;
+        self.actual = actual.strip();
 
         parent.columnconfigure(0, weight=1)
         parent.rowconfigure(0, weight=1)
@@ -33,8 +34,8 @@ class TutorialText(TutorialTopic):
         #TODO: read text from actual.tut file
         self.text = tk.Text(self)
         self.text.grid(row=1, columnspan=3, sticky="nsew")
-        self.text.insert(tk.END, "TODO: READ TUTORIAL TEXT FILE\n\n" +
-                "PREIFHPQWOIEHFPDFJA\nPWFEPDUGFPA\nPOAUGDSPF")
+        fm = FileManager()
+        self.text.insert(tk.END, fm.readTutorialText(self.actual))
 
         #creates "quit button"
         self.quit = tk.Button(self, text="Quit", command=lambda:

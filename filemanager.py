@@ -44,7 +44,10 @@ class FileManager:
         if (filename == "" or filename == None):
             return None
 
-        self.file = open(filename, "r")
+        if (filename[-3:] == ".qc"):
+            self.file = open(filename, "r")
+        else:
+            self.file = open("circuits/" + filename + ".qc", "r")
 
         #create new QC
         qc = QuantumCircuit()
@@ -74,6 +77,16 @@ class FileManager:
         self.file.close()
         self.file = None
         return qc
+
+    def readTutorialText(self, filename):
+        if (filename == "" or filename == None):
+            return None
+
+        self.file = open("tutorial/text/" + filename + ".tut")
+        text = self.file.read()
+        self.file.close()
+        self.file = None
+        return text
 
     def __init__(self):
         self.file = None

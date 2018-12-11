@@ -35,7 +35,7 @@ class TutorialSimulator(tk.Frame):
         self.parent = parent
         self.controller = controller
         self.grid(row = 0, column = 0, sticky = "nsew")
-        self.actual = actual
+        self.actual = actual.strip()
 
         parent.columnconfigure(0, weight=1)
         parent.rowconfigure(0, weight=1)
@@ -54,6 +54,8 @@ class TutorialSimulator(tk.Frame):
         #TODO: load circuit from tutorial/actual.qc
         self.simGrid = Simulator(self.simulatorFrame) #TODO: load circuit
         self.simGrid.grid(row = 0, column = 0, sticky = "nsew")
+        self.simGrid.loadCircuit(self.actual)
+        self.simGrid.drawCircuit()
         
         self.simulatorFrame.columnconfigure(0, weight = 1)
         self.simulatorFrame.rowconfigure(0, weight=9)

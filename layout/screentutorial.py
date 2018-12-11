@@ -33,7 +33,7 @@ class ScreenTutorial(tk.Frame):
                 else:
                     #self.tutorialTopics.append(TutorialTopic(self, self, topicNames[i],
                     #    topicTypes[i]))
-                    print("ERROR AT SCREENTTORIAL.CREATETOPICS\n")
+                    print("ERROR AT SCREENTUTORIAL.CREATETOPICS\n")
                     return
 
                 self.tutorialTopics[i].grid(row=0, column=0, sticky="nsew")
@@ -52,15 +52,35 @@ class ScreenTutorial(tk.Frame):
         self.controller = controller
         self.grid(row = 0, column=0, sticky="nsew")
 
-        topicNames = ["Type 1",
-            "Type 2",
-            "\tIdented",
-            "Type 3",
-            "Type 4"]
+        topicNames = ["Introduction",
+            "\tMotivation",
+            "\tTopic1",
+            "\tTopic2",
+            "LinearAlgebra",
+            "\tBasics",
+            "\tInnerProduct",
+            "\tUnitaryVector",
+            "\tDiracNotation",
+            "\tExercise1",
+            "QuantumMechanics",
+            "\tPostulates",
+            "\tExercise2",
+            "SimulatingCircuits",
+            "\tHowTo",
+            "\tHadamard",
+            "\tExercise3",
+            "QuantumAlgorithms",
+            "\tQuantumTeleport",
+            "\tShorAlgorithm",
+            "\tExercise4"]
         topicTypes = [TopicType.TEXT,
-            TopicType.TEXT_AND_SIMULATOR,
-            TopicType.TEXT,
+            TopicType.TEXT, TopicType.TEXT, TopicType.TEXT,
+            TopicType.TEXT, TopicType.TEXT, TopicType.TEXT, TopicType.TEXT, TopicType.TEXT,
             TopicType.EXERCISE,
+            TopicType.TEXT, TopicType.TEXT, TopicType.EXERCISE,
+            TopicType.TEXT, TopicType.TEXT_AND_SIMULATOR, TopicType.TEXT_AND_SIMULATOR,
+            TopicType.EXERCISE_AND_SIMULATOR,
+            TopicType.TEXT, TopicType.TEXT_AND_SIMULATOR, TopicType.TEXT_AND_SIMULATOR,
             TopicType.EXERCISE_AND_SIMULATOR]
 
         #creates tutorial outline

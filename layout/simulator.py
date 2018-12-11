@@ -77,7 +77,7 @@ class Simulator(Frame):
     def createGrid(self):
         self.width = self.winfo_width()
         self.height = self.winfo_height()
-        self.spacing = 100
+        self.spacing = 125
 
         self.canvas = tk.Canvas(self, bg="white")
         self.canvas.grid(sticky="nsew")
