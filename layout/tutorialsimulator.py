@@ -2,6 +2,7 @@ import tkinter as tk
 from tutorialtopic import *
 from layout.simulator import *
 from layout.screensimulator import *
+from time import sleep
 
 class TutorialSimulator(tk.Frame):
 
@@ -15,7 +16,16 @@ class TutorialSimulator(tk.Frame):
         self.buttonStartSim.grid(row = 1, column = 0, sticky="nsew")
 
     def print_circuit(self):
-        print("TODO: PRINT CIRCUIT\n")
+        print("Connecting to printer...")
+        sleep(2)
+        print("Connection to printer stablished.")
+        sleep(0.1)
+        print("Sending file...")
+        sleep(1)
+        print("File sent. Printing in proces...")
+        sleep(5)
+        print("File printed.")
+        #print("TODO: PRINT CIRCUIT\n")
 
     def buttonPrint(self):
         #self.buttonStartSim = None
