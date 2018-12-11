@@ -92,6 +92,19 @@ class Simulator(Frame):
         self.canvas.delete("grid_line") #delete("all")
         self.createVerticalLines(self.width, self.height, self.spacing)
         self.createHorizontalLines(self.width, self.height, self.spacing)
+
+    def setClickable(self, c):
+        self.clickable = c
+
+    def clicked(self, event):
+        if (self.quantumCircuit != None):
+            qc = self.quantumCircuit.getCircuit()
+            if (event.x <= len(qc[0]) * self.spacing and
+                    event.y <= len(qc) * self.spacing):
+
+                x = int(event.x / self.spacing)
+                y = int(event.y / self.spacing)
+                self.controller.clicked(qc[y][x].getLabel())
         
     def __init__(self, parent=None, controller=None):
         Frame.__init__(self, parent)
@@ -104,6 +117,8 @@ class Simulator(Frame):
         self.rowconfigure(0, weight=1)
 
         self.createGrid()
+        self.canvas.bind("<Button-1>", self.clicked)
+        self.clickable = False
 
         self.bind("<Configure>", self.resize)
 

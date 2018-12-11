@@ -46,9 +46,10 @@ class ScreenStart(Frame):
         self.sideFrame.grid(row=0, column=0, sticky="nsew")
         self.sb = Sidebar(parent=self.sideFrame, controller=self.controller)
 
-        self.simulatorFrame = tk.Frame(self, borderwidth=5, relief="sunken", bg="orange")
+        self.simulatorFrame = tk.Frame(self, borderwidth=5, relief="sunken", bg="purple")
         self.simulatorFrame.grid(row=0, column=1, sticky="nsew")
         self.simulatorGrid = Simulator(parent=self.simulatorFrame, controller=self.controller)
+        self.simulatorGrid.setClickable(True)
         
         self.circuitInWorkspace = None
         self.simulatorGrid.drawCircuit()

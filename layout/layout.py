@@ -1,10 +1,21 @@
 from tkinter import *
 from tkinter import ttk
+import tkinter as tk
 from layout.screenstart import *
 from layout.screensimulator import *
 from layout.screentutorial import *
+from filemanager import *
+from layout.tutorialtext import *
 
 class LayoutManager:
+    def clicked(self, label):
+        fm = FileManager()
+        print(label)
+        print("OPEN NEW WINDOW")
+        window = Toplevel(self.root)
+        tt = TutorialText(window, window, label)
+
+
     def mainloop(self):
         self.root.mainloop()
         #self.startScreen.mainloop()
