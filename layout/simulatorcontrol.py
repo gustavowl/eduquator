@@ -12,7 +12,7 @@ class SimulatorControl(Frame):
             self.cv.acquire()
 
             while (self.isPaused):
-                print("PAUSE " + str(x))
+                #print("PAUSE " + str(x))
                 self.cv.wait()
 
             sleep(0.02) #sleep a fraction of second before drawing
@@ -101,4 +101,3 @@ class SimulatorControl(Frame):
         self.cv.notify()
         self.cv.release()
         self.threadPlay.join()
-        print("JOY")

@@ -5,7 +5,7 @@ from quantumgate import *
 class FileManager:
 
     def createQubit(self, label):
-        print("circuit read from file. Label: " + label)
+        #print("circuit read from file. Label: " + label)
         qubit = Qubit()
         if (label == "0"):
             qubit.set0()

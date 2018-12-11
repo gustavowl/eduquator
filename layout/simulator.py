@@ -15,7 +15,7 @@ class Simulator(Frame):
                             self.spacing / 2 + y * self.spacing, font="Times 18 bold",
                             text=qcmatrix[y][x].getLabel())
 
-            self.quantumCircuit.print()
+            #self.quantumCircuit.print()
 
     def erasePlayLine(self):
         self.canvas.delete("play_line")
