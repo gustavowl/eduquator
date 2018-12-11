@@ -22,15 +22,16 @@ class ScreenSimulator(Frame):
         self.rowconfigure(0, weight=2)
         self.rowconfigure(1, weight=9)
         self.rowconfigure(2, weight=9)
-
-        self.simulatorControllerFrame = tk.Frame(self, borderwidth=5, bg="blue")
-        self.simulatorControllerFrame.grid(row=0, column=0, sticky="ew")
-        self.sc = SimulatorControl(parent=self.simulatorControllerFrame,
-                controller=self.controller, onStopPressed=onStopPressed)
         
         self.simulatorFrame = tk.Frame(self, borderwidth=5, bg="green")
         self.simulatorFrame.grid(row=1, column=0, sticky="nsew")
         self.simulator = Simulator(parent=self.simulatorFrame, controller=self.controller)
+
+        self.simulatorControllerFrame = tk.Frame(self, borderwidth=5, bg="blue")
+        self.simulatorControllerFrame.grid(row=0, column=0, sticky="ew")
+        self.sc = SimulatorControl(parent=self.simulatorControllerFrame,
+                controller=self.controller, onStopPressed=onStopPressed,
+                underControl=self.simulator)
 
         self.repFrame = tk.Frame(self, borderwidth=4, bg="blue")
         self.repFrame.grid(row=2, column=0, sticky="nsew")

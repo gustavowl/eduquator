@@ -17,6 +17,15 @@ class Simulator(Frame):
 
             self.quantumCircuit.print()
 
+    def drawPlayLine(self, x):
+        print("position " + str(x))
+        self.canvas.delete("play_line")
+        y = len(self.quantumCircuit.getCircuit())
+        line_thickness = 5
+        for i in range (line_thickness):
+            self.canvas.create_line( [(x + i, 0), (x + i, y * self.spacing)],
+                tag="play_line" )
+
     def createHorizontalLines(self, width, height, spacing):
         for i in range(0, height, spacing):
             self.canvas.create_line([(0, i), (width, i)], tag='grid_line')
