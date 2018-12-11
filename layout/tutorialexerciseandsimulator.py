@@ -5,6 +5,9 @@ from layout.tutorialsimulator import *
 
 class TutorialExerciseAndSimulator(TutorialTopic):
 
+    def setOutline(self, outline):
+        self.tutText.setOutline(outline)
+
     def setPrevious(self, previous):
         self.tutText.setPrevious(previous)
         #super().setPrevious(previous)
