@@ -51,8 +51,7 @@ class TutorialSimulator(tk.Frame):
         self.simulatingFrame = tk.Frame(self, borderwidth=5, bg="purple")
         self.simulatingFrame.grid(row = 0, column = 0, sticky = "nsew")
 
-        #TODO: load circuit from tutorial/actual.qc
-        self.simGrid = Simulator(self.simulatorFrame) #TODO: load circuit
+        self.simGrid = Simulator(self.simulatorFrame) 
         self.simGrid.grid(row = 0, column = 0, sticky = "nsew")
         self.simGrid.loadCircuit(self.actual)
         self.simGrid.drawCircuit()
@@ -67,5 +66,6 @@ class TutorialSimulator(tk.Frame):
         self.screenSim = ScreenSimulator(parent=self.simulatingFrame,
                 controller = self.controller, onStopPressed = self.simulatorFrame)
         self.screenSim.grid(row = 0, column = 0, sticky = "nsew")
+        self.screenSim.setCircuit(self.actual)
 
         self.show_frame(self.simulatorFrame)
