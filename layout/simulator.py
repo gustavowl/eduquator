@@ -17,14 +17,54 @@ class Simulator(Frame):
 
             self.quantumCircuit.print()
 
-    def drawPlayLine(self, x):
-        print("position " + str(x))
+    def erasePlayLine(self):
         self.canvas.delete("play_line")
-        y = len(self.quantumCircuit.getCircuit())
-        line_thickness = 5
-        for i in range (line_thickness):
+
+    def drawPlayLine(self, x):
+        self.canvas.delete("play_line")
+        qc = self.quantumCircuit.getCircuit()
+        y = len(qc)
+        for i in range (self.play_line_thickness):
             self.canvas.create_line( [(x + i, 0), (x + i, y * self.spacing)],
                 tag="play_line" )
+
+        return len(qc[0]) * self.spacing <= x
+
+    def getNextOperator(self, x, qc):
+        if (x <= 0 or x >= len(qc[0])):
+            return np.matrix("")
+        operator = qc[0][x].getMatrix()
+        for i in range (1, len(qc)):
+            operator = np.kron(operator, qc[i][x].getMatrix())
+
+        return operator 
+
+    def updateRepresentation(self, x):
+        #if previous state is initial, then reset
+        qc = self.quantumCircuit.getCircuit()
+        y = len(qc)
+        update = False
+        if (x - 1 == 0):
+            self.state = qc[0][0].getVec()
+            self.operator = np.matrix("")
+
+            for i in range(1, y):
+                self.state = np.kron(self.state, qc[i][0].getVec())
+
+            update = True
+        elif ((x + self.play_line_thickness) % self.spacing == 0):
+            xcircuit = int((x + self.play_line_thickness) / self.spacing)
+            if (self.operator.any()):
+                #apply operator
+                self.state = self.operator * self.state
+
+            self.operator = self.getNextOperator(xcircuit, qc)
+
+            update = True
+
+                
+        if update:
+            self.controller.updateRepresentation(str(self.operator), str(self.state))
 
     def createHorizontalLines(self, width, height, spacing):
         for i in range(0, height, spacing):
@@ -69,5 +109,7 @@ class Simulator(Frame):
 
         self.quantumCircuit = None
         self.fileManager = FileManager()
+
+        self.play_line_thickness = 5
 
         self.drawCircuit()

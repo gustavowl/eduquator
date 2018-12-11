@@ -5,6 +5,14 @@ from layout.simulator import *
 from layout.representations import *
 
 class ScreenSimulator(Frame):
+
+    def updateRepresentation(self, matrix, array):
+        if (matrix == None):
+            matrix = ""
+        if (array == None):
+            array = ""
+        self.representations.updateMatrixText(matrix)
+        self.representations.updateArrayText(array)
     
     def setCircuit(self, circuit):
         self.simulator.loadCircuit(circuit)
@@ -25,7 +33,7 @@ class ScreenSimulator(Frame):
         
         self.simulatorFrame = tk.Frame(self, borderwidth=5, bg="green")
         self.simulatorFrame.grid(row=1, column=0, sticky="nsew")
-        self.simulator = Simulator(parent=self.simulatorFrame, controller=self.controller)
+        self.simulator = Simulator(parent=self.simulatorFrame, controller=self)
 
         self.simulatorControllerFrame = tk.Frame(self, borderwidth=5, bg="blue")
         self.simulatorControllerFrame.grid(row=0, column=0, sticky="ew")

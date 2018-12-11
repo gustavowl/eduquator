@@ -41,6 +41,9 @@ class QuantumGate:
         self.numberOfIOs = matrix[0].size / 2
         self.matrix = matrix
 
+    def getMatrix(self):
+        return self.matrix
+
     def print(self):
         print("Gate label: " + self.label)
         print("Gate numberOfIOs: " + str(self.numberOfIOs))

@@ -12,29 +12,38 @@ class SimulatorControl(Frame):
             self.cv.acquire()
 
             while (self.isPaused):
-                x = 0
                 print("PAUSE " + str(x))
                 self.cv.wait()
 
-            sleep(0.1) #sleep a fraction of second before drawing
+            sleep(0.02) #sleep a fraction of second before drawing
             x += 1
-            self.underControl.drawPlayLine(x)
-
+    
+            #dont know why release is necessary before drawPlayLine call
             self.cv.release()
+            finished = self.underControl.drawPlayLine(x)
+            self.underControl.updateRepresentation(x)
+
+            if (finished):
+                self.cv.acquire()
+                self.isPaused = True
+                self.pausePlayButton["text"] = "|⟩"
+                x = 0
+                self.cv.release()
+                self.underControl.erasePlayLine()
 
     def pausePlay(self):
+        self.cv.acquire()
+
         if self.isPaused:
-            self.cv.acquire()
             self.pausePlayButton["text"] = "||"
-            self.isPaused = not self.isPaused
+            self.isPaused = False
             self.cv.notify()
-            self.cv.release()
             
         else:
-            self.cv.acquire()
             self.pausePlayButton["text"] = "|⟩"
-            self.isPaused = not self.isPaused
-            self.cv.release()
+            self.isPaused = True
+
+        self.cv.release()
 
     def createWidgets(self, onStopPressed):
         self.statusLabel = ttk.Label(self, text="Simulating")
