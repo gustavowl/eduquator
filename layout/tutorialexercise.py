@@ -1,5 +1,6 @@
 import tkinter as tk
 from tutorialtopic import *
+from filemanager import *
 
 class TutorialExercise(TutorialTopic):
 
@@ -20,7 +21,7 @@ class TutorialExercise(TutorialTopic):
         self.parent = parent
         self.controller = controller
         self.grid(row = 0, column = 0, sticky="nsew")
-        self.actual = actual;
+        self.actual = actual.strip();
 
         parent.columnconfigure(0, weight=1)
         parent.rowconfigure(0, weight=1)
@@ -33,8 +34,11 @@ class TutorialExercise(TutorialTopic):
         #TODO: read exercise from actual.txr file
         self.text = tk.Text(self)
         self.text.grid(row=1, columnspan=3, sticky="nsew")
-        self.text.insert(tk.END, "TODO: READ TUTORIAL EXERCISE FILE\n\n" +
-                "TODO: ADD RADIO BUTTONS")
+        fm = FileManager()
+        ret = fm.readTutorialExercise(self.actual)
+        self.text.insert(tk.END, ret[0])
+        for i in range(1, len(ret)):
+            self.text.insert(tk.END, "[ ]" + ret[i] + "\n")
 
         #creates "quit button"
         self.quit = tk.Button(self, text="Quit", command=lambda:

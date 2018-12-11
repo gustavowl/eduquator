@@ -88,6 +88,31 @@ class FileManager:
         self.file = None
         return text
 
+
+    def readTutorialExercise(self, filename):
+        if (filename == "" or filename == None):
+            return None
+
+        self.file = open("tutorial/exercises/" + filename + ".txr")
+        text = self.file.read()
+        lines = text.split("\n")
+        text = ""
+        ret = []
+        firsttime = True
+        for i in range(len(lines) - 1):
+            if (lines[i][:3] != "%o%"):
+                text += lines[i] + "\n"
+            elif (firsttime):
+                ret.append(text)
+                ret.append(lines[i][3:])
+                firsttime = False
+            else:
+                ret.append(lines[i][3:])
+
+        self.file.close()
+        self.file = None
+        return ret
+
     def __init__(self):
         self.file = None
 
